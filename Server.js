@@ -16,7 +16,7 @@ if (fs.existsSync(configPath)) {
 }
 
 const app = express();
-const PORT = config.Port || 3000;
+const PORT = process.env.PORT || config.Port || 3000;
 
 app.use(cors());
 
@@ -119,7 +119,6 @@ console.log = function (...args) {
   }
 };
 
-
 const originalConsoleError = console.error;
 console.error = function (...args) {
   const message = args.map(arg => typeof arg === 'string' ? arg : JSON.stringify(arg)).join(' ');
@@ -133,7 +132,6 @@ console.error = function (...args) {
     originalConsoleError.apply(console, args);
   }
 };
-
 
 function formatIP(ip) {
   if (typeof ip !== 'string') return ip;
